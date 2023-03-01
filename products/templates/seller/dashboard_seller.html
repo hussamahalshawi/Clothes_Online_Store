@@ -1,0 +1,16 @@
+{% extends 'seller/basic_seller.html' %}
+{% block title %} Clothes Online Store {% endblock %}
+{% block css %}
+<link rel="showcasing icon" href="/media/a/laundry.png">
+{% endblock %}
+{% block body %}
+<a  href="{% url 'products-create' %}">add product</a>
+
+{% for product in product_list %}
+
+<p>{{product.name}}</p>
+<a  href="{% url 'products-detail' product.id %}">product detail</a>
+<a  href="{% url 'products-update' product.id %}">product apdate</a>
+
+{% endfor %}
+{% endblock %}

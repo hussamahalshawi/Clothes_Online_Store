@@ -1,0 +1,16 @@
+{% extends 'Customer/basic_customer.html' %}
+{% block title %} Clothes Online Store {% endblock %}
+{% block css %}
+<link rel="showcasing icon" href="/media/a/laundry.png">
+{% endblock %}
+{% block body %}
+<p>{{user.username}}</p>
+
+{% for product in product_list %}
+<p>{{product.name}}</p>
+<a  href="{% url 'products-detail' product.id %}">product detail</a>
+
+{% endfor %}
+
+<p>{{user.username}}</p>
+{% endblock %}

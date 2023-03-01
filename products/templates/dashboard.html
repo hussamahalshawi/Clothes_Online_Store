@@ -1,0 +1,26 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} Clothes Online Store {% endblock %}
+{% block head %} 
+{% endblock %}
+{% block css %}
+<link rel="showcasing icon" href="/media/a/laundry.png">
+{% endblock %}
+{% block body %}
+{% for product in product_list %}
+<br>
+<h2><a href="{% url 'products-detail' product.id%}">{{product.name}}</a></h2>
+<img style="width: 10ch; height: 10ch;" src="/media/{{product.picture }}" alt="aa">
+<small>
+    {{ product.created_on.date }} |&nbsp;
+    Categories:&nbsp;
+    {% for category in product.categories.all %}
+    <a href="{% url 'blog_category' category.name %}">
+        {{ category.name }}
+    </a>&nbsp;
+    {% endfor %}
+</small>
+<p>{{ product.description | slice:":400" }}...</p>
+{% endfor %}
+
+{% endblock %}
