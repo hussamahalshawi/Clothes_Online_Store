@@ -1,0 +1,316 @@
+{% extends 'customer/basic_customer.html' %}
+{% load static %}
+{% block title %} Profile {% endblock %}
+
+{% block css %}
+<style>
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #f6d365;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+    }
+
+</style>
+{% endblock %}
+{% block body %}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="/dashboard_customer/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="/media/{{ user.customuser.profile_pic }}" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">{{ user }}</h5>
+              <a href="/edit_profile_customer/" style="width: 9rem;" class="btn btn-outline-primary mt-3">Edit Profile</a>
+
+              <div class="d-flex justify-content-center mb-2">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-lg-8">
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Full Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.customuser.get_name }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Email</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.email }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Mobile</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.customuser.mobile }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Address</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.customuser.address }}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">User Type</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{ user.customuser.USER_type }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  </p>
+                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                  <div class="progress rounded mb-2" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card mb-4 mb-md-0">
+                <div class="card-body">
+                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                  </p>
+                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                  <div class="progress rounded" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                  <div class="progress rounded mb-2" style="height: 5px;">
+                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<section class="vh-100" style="background-color: #f4f5f7;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-6 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center text-white"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                  alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
+                <h5>{{ user }}</h5>
+                <a href="/edit_profile/" style="width: 9rem;" class="btn btn-outline-primary mt-3">Edit Profile</a>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Information</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{ user.email }}</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Phone</h6>
+                      <p class="text-muted">{{ user.customuser.mobile }}</p>
+                    </div>
+                  </div>
+                  <h6>Projects</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Recent</h6>
+                      <p class="text-muted">Lorem ipsum</p>
+                    </div>
+                    <div class="col-6 mb-3">
+                      <h6>Most Viewed</h6>
+                      <p class="text-muted">Dolor sit amet</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container profile">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="{% static user.student.image %}" alt="" width="310px" height="270px">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="profile-tab">
+                    <div class="tab-pane">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>ID:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.id}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Username:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Full Name:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.get_full_name}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.email}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone Number:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.student.phone}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Branch:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.student.branch}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Class:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.student.classroom}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Roll Number:</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{user.student.roll_no}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/edit_profile/" style="width: 9rem;" class="btn btn-outline-primary mt-3">Edit Profile</a>
+                </div>
+            </div>
+</div>
+</div>
+{% endblock %}

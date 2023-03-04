@@ -15,8 +15,8 @@ class Productslistview(ListView):
     model = Product
     template_name = "dashboard.html"
     def get_queryset(self):
-        if 'q' in self.request.GET:
-            queryset = self.request.GET.get('q')
+        if 'query' in self.request.GET:
+            queryset = self.request.GET.get('query')
             object_list = Product.objects.filter(
                 Q(name__icontains=queryset) or Q(state__icontains=queryset)
             ).order_by('created_at')
@@ -59,8 +59,8 @@ class sellerlistview(LoginRequiredMixin,ListView):
     model = Product
     template_name = "seller/dashboard_seller.html"
     def get_queryset(self):
-        if 'q' in self.request.GET:
-            queryset = self.request.GET.get('q')
+        if 'query' in self.request.GET:
+            queryset = self.request.GET.get('query')
             object_list = Product.objects.filter(
                 Q(name__icontains=queryset) or Q(state__icontains=queryset)
             ).order_by('created_at')
@@ -73,8 +73,8 @@ class customerlistview(LoginRequiredMixin,ListView):
     model = Product
     template_name = "Customer/dashboard_customer.html"
     def get_queryset(self):
-        if 'q' in self.request.GET:
-            queryset = self.request.GET.get('q')
+        if 'query' in self.request.GET:
+            queryset = self.request.GET.get('query')
             object_list = Product.objects.filter(
                 Q(name__icontains=queryset) or Q(state__icontains=queryset)
             ).order_by('created_at')
@@ -82,7 +82,10 @@ class customerlistview(LoginRequiredMixin,ListView):
             object_list = Product.objects.all().order_by('created_at')
         return object_list
     paginate_by = 30
-def blog_category(request, category):
+
+
+
+def blog_category_seller(request, category):
     product = Product.objects.filter(categories__name__contains=category
     ).order_by('-created_at'
     )
@@ -91,7 +94,18 @@ def blog_category(request, category):
         "category": category,
         "product": product,
     }
-    return render(request, "products/product_category.html", context)
+    return render(request, "seller/product_category_seller.html", context)
+
+def blog_category_Customer(request, category):
+    product = Product.objects.filter(categories__name__contains=category
+    ).order_by('-created_at'
+    )
+    print(product)
+    context = {
+        "category": category,
+        "product": product,
+    }
+    return render(request, "Customer/product_category_Customer.html", context)
 
 
 class ProductsCreateView(LoginRequiredMixin,CreateView) :
@@ -99,16 +113,43 @@ class ProductsCreateView(LoginRequiredMixin,CreateView) :
     model = Product
 
     fields = [
+        'user',
         'name',
-        'sizes',
-        'colors',
         'picture',
         'price',
+        'DiscountPrice',
+        'Cost',
+        'sizes',
+        'colors',
+        'categories',
         'description',
     ] 
     success_url = reverse_lazy("dashboard_seller")
-    template_name = "products/products_form.html"
+    template_name = "seller/add_products.html"
+
+
+@login_required(login_url='/seller_login')
+def create_product(request):
+    if request.method == "POST":
+        user = request.user
+        name = request.POST['name']
+        picture = request.FILES['picture']
+        price = request.POST['price']
+        DiscountPrice = request.POST['DiscountPrice']
+        Cost = request.POST['Cost']
+        sizes = request.POST['sizes_s']
+        colors = request.POST['black']
+        description = request.POST['description']
+        categories = request.POST['Man']
+        product = Product.objects.create(
+            user = user , name = name , picture = picture , price = price , DiscountPrice=DiscountPrice, Cost = Cost, sizes = sizes , colors = colors, description = description, categories = categories)
+        product.save()
+        print(user,sizes, colors)
+        return redirect("/dashboard_seller")
+    return render(request, "seller/add_products.html")
+
 
 class Productsupdateview (ProductsCreateView,LoginRequiredMixin, UpdateView):
     login_url='/seller_login'
     success_url = reverse_lazy("dashboard_seller")
+

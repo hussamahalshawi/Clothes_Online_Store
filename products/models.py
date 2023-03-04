@@ -13,11 +13,11 @@ class Category(models.Model):
 class Product(models.Model):
     user = models.ForeignKey(User, related_name="product", on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=40)
-    picture = models.ImageField(upload_to='photo/', blank=True)
+    picture = models.ImageField(upload_to='photo/', blank=True, null=True)
     price = models.PositiveIntegerField()
     description=models.TextField(verbose_name=("Description"))
-    DiscountPrice = models.DecimalField(max_digits=5  , decimal_places=2 , verbose_name=("Discount Price"))
-    Cost = models.DecimalField(max_digits=5 , decimal_places=2 , verbose_name=("Cost"))
+    DiscountPrice = models.DecimalField(max_digits=5,blank=True, null=True  , decimal_places=2 , verbose_name=("Discount Price"))
+    Cost = models.DecimalField(max_digits=5 ,blank=True, null=True, decimal_places=2 , verbose_name=("Cost"))
     size = [
         ('s','small'),
         ('m','medium'),
@@ -33,8 +33,7 @@ class Product(models.Model):
     color = [
         ('w', 'white'),
         ('g', 'green'),
-        ('y', 'yellow'),
-        ('o', 'orange'),
+        ('r', 'red'),
         ('bu', 'blue'),
         ('bk', 'black'),
     ]

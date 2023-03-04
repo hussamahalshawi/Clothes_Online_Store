@@ -1,0 +1,52 @@
+{% extends 'customer/basic_customer.html' %}
+{% load static %}
+{% block title %} Clothes Online Store {% endblock %}
+{% block head %} 
+{% endblock %}
+{% block css %}
+<link rel="showcasing icon" href="/media/a/laundry.png">
+{% endblock %}
+{% block body %}
+{% block page_content %}
+<div class="fashion_section">
+    <div class="container">
+        <h1 class="fashion_taital">{{ category | title }}</h1>
+        <div class="fashion_section_2">
+            <div class="row">
+            
+            {% if not product %}
+                <h1>not</h1>
+            {% else %}
+            {% for product in product %}
+                <div class="col-lg-4 col-sm-4">
+                    <div class="box_main">
+                        <h4 class="shirt_text">{{product.name}}</h4>
+                        <div class="tshirt_img"><img src="/media/{{product.picture }}"></div>
+                        <div class="btn_main">
+                            <p class="price_text">Price <span style="color: #262626;">$ {{product.price}}</span></p>
+                            <div class="buy_bt">{% for category in product.categories.all %}
+                                <a href="{% url 'blog_category_customer' category.name %}">
+                                    {{ category.name }}
+                                </a>
+                                {% endfor %}</div>
+                                
+                                <div class="buy_bt"><a href="#">Add to cart</a></div>
+                            </div>
+                            <div class="btn_main">
+                            <p class="price_text">{{ product.description | slice:":400" }}...</p>
+                            <div class="seemore_bt"><a href="{% url 'products-detail' product.id %}">See More</a></div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
