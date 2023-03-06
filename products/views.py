@@ -193,39 +193,18 @@ def create_product(request):
         colors = request.POST.getlist('colors')
         description = request.POST['description']
         categories = request.POST.getlist('categories')
-        # categories = Category.objects.get(pk=int(request.POST.getlist('categories')))
-        # categories = Category.objects.filter(name = categories_name)
-        # sizes = []
-        # sizes.append(request.POST.get('small'))
-        # sizes.append(request.POST.get('medium'))
-        # sizes.append(request.POST.get('large'))
-        # sizes.append(request.POST.get('xlarge'))
-        # sizes.append(request.POST.get('xxlarge'))
-        # colors = []
-        # colors.append(request.POST.get('black'))
-        # colors.append(request.POST.get('blue'))
-        # colors.append(request.POST.get('red'))
-        # colors.append(request.POST.get('green'))
-        # colors.append(request.POST.get('white'))
-        # sizes = request.POST['sizes_s']
-        # colors = request.POST['black']
-        
-        # # categories = []
-        # categories_man = request.POST.get('Man')
-        # categories_woman = request.POST.get('Woman')
-        # categories.append(request.POST.get('Man'))
-        # categories.append(request.POST.get('Woman'))
-        # categories = request.POST['Man']
-        print(user,sizes, colors,categories )
+        print(user,sizes, colors,categories[0] )
         product = Product.objects.create(
             user = user , name = name , picture = picture , price = price ,
               DiscountPrice=DiscountPrice, Cost = Cost, sizes = sizes ,
                 colors = colors, description = description)
-        # Product.categories = categories
         product.save()
-        product.categories.add("categories")
-        # request.Product.Category.add("categories")
-        # Product.categories
+        for i in categories:
+            product.categories.add(i)
+        # categories1 = categories[0]
+        # categories2 = categories[1]
+        # product.categories.add(categories1)
+        # product.categories.add(categories2)
         return redirect("/dashboard_seller")
     return render(request, "seller/add_products.html")
 
