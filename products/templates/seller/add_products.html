@@ -3,11 +3,141 @@
 {% load static %}
 {% block content %}
 {% block body %}
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save products">
-</form>
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="card text-black" style="border-radius: 25px;">
+            <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Add Product</p>
+            <form class="mx-1 mx-md-4" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example1c">User Name :</label>
+                            <input type="text" id="form3Example1c" class="form-control" name="username"
+                                value="{{request.user}}" readonly />
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example1n">Name :</label>
+                            <input type="text" class="form-control" name="name" placeholder="Enter Name" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="form-label" for="form3Example3c">Picture :</label>
+                        <input type="file" class="form-control" name="picture" required>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example3c">Price :</label>
+                            <input type="number" class="form-control" name="price" placeholder="Enter Price" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example3c">Dis Count Price :</label>
+                            <input type="number" class="form-control" name="DiscountPrice"
+                                placeholder="Enter Dis Count Price" required>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example3c">Cost :</label>
+                            <input type="number" class="form-control" name="Cost" placeholder="Enter Cost" required>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example3c">Categories :</label>
+                            <!-- <select name="categories" id="id_categories" multiple="">
+                                <option value="1">Man</option>
+                              
+                                <option value="2">Woman</option>
+                              
+                              </select> -->
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="1" id="Man" name="categories" >
+                                <label class="form-check-label" for="Man">Man</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="2" id="Woman" name="categories" >
+                                <label class="form-check-label" for="Woman">Woman</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-outline">
+                            <label class="col-12 col-sm-9">Sizes :</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="s" id="small" name="sizes" >
+                                <label class="form-check-label" for="small">Small</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="m" id="medium" name="sizes" >
+                                <label class="form-check-label" for="medium">Medium</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="l" id="large" name="sizes" >
+                                <label class="form-check-label" for="large">Large</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="xl" id="xlarge" name="sizes" >
+                                <label class="form-check-label" for="xlarge">XLarge</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="xxl" id="xxlarge" name="sizes" >
+                                <label class="form-check-label" for="xxlarge">XXLarge</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                            <label class="form-label" for="form3Example3c">Description:</label>
+                            <textarea name="description" id="" cols="50" rows="10" class="form-control"
+                                required></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-outline">
+                            <label class="col-12 col-sm-9">Colors :</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="bk" id="black" name="colors" >
+                                <label class="form-check-label" for="black">Black</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="bu" id="blue"  name="colors" >
+                                <label class="form-check-label" for="blue">Blue</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="r" id="red"  name="colors" >
+                                <label class="form-check-label" for="red">Red</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="g" id="green"  name="colors" >
+                                <label class="form-check-label" for="green">Green</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="w" id="white"  name="colors" >
+                                <label class="form-check-label" for="white">White</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 {% endblock %}

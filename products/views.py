@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (ListView , CreateView , UpdateView , DeleteView, DetailView)
-from .models import Product , Feedback
+from .models import Product , Feedback, Category
 from .forms import CommentForm
 
 from django.contrib.auth.decorators import login_required
@@ -47,6 +47,7 @@ def blog_detail(request, pk):
                 products_feed=product
             )
             comment.save()
+            return redirect('products-detail',pk=pk)
     comments = Feedback.objects.filter(products_feed=product)
     context = {
         "product": product,
@@ -54,6 +55,46 @@ def blog_detail(request, pk):
         "form": form,
     }
     return render(request, "products/detail.html", context)
+def blog_detail_customer(request, pk):
+    product = Product.objects.get(pk=pk)
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = Feedback(
+                name=form.cleaned_data["name"],
+                feedback=form.cleaned_data["feedback"],
+                products_feed=product
+            )
+            comment.save()
+            return redirect('products-detail',pk=pk)
+    comments = Feedback.objects.filter(products_feed=product)
+    context = {
+        "product": product,
+        "comments": comments,
+        "form": form,
+    }
+    return render(request, "customer/detail.html", context)
+def blog_detail_seller(request, pk):
+    product = Product.objects.get(pk=pk)
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = Feedback(
+                name=form.cleaned_data["name"],
+                feedback=form.cleaned_data["feedback"],
+                products_feed=product
+            )
+            comment.save()
+            return redirect('products-detail',pk=pk)
+    comments = Feedback.objects.filter(products_feed=product)
+    context = {
+        "product": product,
+        "comments": comments,
+        "form": form,
+    }
+    return render(request, "seller/detail.html", context)
 class sellerlistview(LoginRequiredMixin,ListView):
     login_url='/seller_login'
     model = Product
@@ -84,6 +125,17 @@ class customerlistview(LoginRequiredMixin,ListView):
     paginate_by = 30
 
 
+
+def blog_category(request, category):
+    product = Product.objects.filter(categories__name__contains=category
+    ).order_by('-created_at'
+    )
+    print(product)
+    context = {
+        "category": category,
+        "product": product,
+    }
+    return render(request, "product_category.html", context)
 
 def blog_category_seller(request, category):
     product = Product.objects.filter(categories__name__contains=category
@@ -137,14 +189,43 @@ def create_product(request):
         price = request.POST['price']
         DiscountPrice = request.POST['DiscountPrice']
         Cost = request.POST['Cost']
-        sizes = request.POST['sizes_s']
-        colors = request.POST['black']
+        sizes = request.POST.getlist('sizes')
+        colors = request.POST.getlist('colors')
         description = request.POST['description']
-        categories = request.POST['Man']
+        categories = request.POST.getlist('categories')
+        # categories = Category.objects.get(pk=int(request.POST.getlist('categories')))
+        # categories = Category.objects.filter(name = categories_name)
+        # sizes = []
+        # sizes.append(request.POST.get('small'))
+        # sizes.append(request.POST.get('medium'))
+        # sizes.append(request.POST.get('large'))
+        # sizes.append(request.POST.get('xlarge'))
+        # sizes.append(request.POST.get('xxlarge'))
+        # colors = []
+        # colors.append(request.POST.get('black'))
+        # colors.append(request.POST.get('blue'))
+        # colors.append(request.POST.get('red'))
+        # colors.append(request.POST.get('green'))
+        # colors.append(request.POST.get('white'))
+        # sizes = request.POST['sizes_s']
+        # colors = request.POST['black']
+        
+        # # categories = []
+        # categories_man = request.POST.get('Man')
+        # categories_woman = request.POST.get('Woman')
+        # categories.append(request.POST.get('Man'))
+        # categories.append(request.POST.get('Woman'))
+        # categories = request.POST['Man']
+        print(user,sizes, colors,categories )
         product = Product.objects.create(
-            user = user , name = name , picture = picture , price = price , DiscountPrice=DiscountPrice, Cost = Cost, sizes = sizes , colors = colors, description = description, categories = categories)
+            user = user , name = name , picture = picture , price = price ,
+              DiscountPrice=DiscountPrice, Cost = Cost, sizes = sizes ,
+                colors = colors, description = description)
+        # Product.categories = categories
         product.save()
-        print(user,sizes, colors)
+        product.categories.add("categories")
+        # request.Product.Category.add("categories")
+        # Product.categories
         return redirect("/dashboard_seller")
     return render(request, "seller/add_products.html")
 

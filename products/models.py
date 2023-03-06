@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 # from django.forms import CharField
 from django_mysql.models import ListCharField
-
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 ##########################Category################################
 class Category(models.Model):
@@ -43,12 +44,18 @@ class Product(models.Model):
         max_length=(6 * 11),  # 6 * 10 character nominals, plus commas
     )
     categories = models.ManyToManyField('Category',blank=True, null=True,
-     related_name='product')
+     related_name='category')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
- 
+@receiver(post_save, sender=Category)
+def create_Product(sender, instance, created, **kwargs):
+    if created:
+        categories_Product = Product(category=instance)
+        categories_Product.save()
+        categories_Product.categories.set([instance.product.id])
+        categories_Product.save() 
 
 #############################Feedback_model###################################
 class Feedback(models.Model):
