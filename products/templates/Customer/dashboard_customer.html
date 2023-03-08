@@ -90,7 +90,7 @@
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             <span class="padding_10">Cart</span></a>
                                     </li>
-                                    <li><a href="{% url acount_customer %}" >
+                                    <li><a href="{% url 'acount_customer' %}" >
                                             <i class="fa fa-user" aria-hidden="true"></i>
                                             <span class="padding_10">Acount</span></a>
                                     </li>
@@ -141,7 +141,7 @@
                             <div class="btn_main">
                                 <p class="price_text">Price <span style="color: #262626;">$ {{product.price}}</span></p>
                                 <div class="buy_bt">{% for category in product.categories.all %}
-                                    <a href="{% url 'blog_category_customer' category.name %}">
+                                    <a href="{% url 'blog_category_Customer' category.name %}">
                                         {{ category.name }}
                                     </a>
                                     {% endfor %}</div>

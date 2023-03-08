@@ -201,10 +201,7 @@ def create_product(request):
         product.save()
         for i in categories:
             product.categories.add(i)
-        # categories1 = categories[0]
-        # categories2 = categories[1]
-        # product.categories.add(categories1)
-        # product.categories.add(categories2)
+            list.append
         return redirect("/dashboard_seller")
     return render(request, "seller/add_products.html")
 
