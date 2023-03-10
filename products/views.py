@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (ListView , CreateView , UpdateView , DeleteView, DetailView)
+import requests
 from .models import Product , Feedback, Category
 from .forms import CommentForm
 
@@ -201,7 +202,6 @@ def create_product(request):
         product.save()
         for i in categories:
             product.categories.add(i)
-            list.append
         return redirect("/dashboard_seller")
     return render(request, "seller/add_products.html")
 
@@ -210,3 +210,21 @@ class Productsupdateview (ProductsCreateView,LoginRequiredMixin, UpdateView):
     login_url='/seller_login'
     success_url = reverse_lazy("dashboard_seller")
 
+def load_products(request):
+    r = requests.get('https://fakestoreapi.com/products')
+    for item in r.json():
+        user = request.user
+        product = Product(
+            user = user,
+            name = item['title'],
+            picture = item['image'],
+            price = item['price'],
+            sizes = ['s','m','l','xl','xxl'],
+            colors = ['bk','w','g','r','bu'],
+            description = item['description'],
+            
+        )
+        product.save()
+        product.categories.add(1)
+
+    return redirect("/dashboard")
