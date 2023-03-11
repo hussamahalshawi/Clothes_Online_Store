@@ -1,6 +1,9 @@
 {% extends 'basic.html' %}
 {% load static %}
-{% block title %} Customer Registration {% endblock %}
+{% block title %} Customuser Registration {% endblock %}
+{% block css %}
+    <link rel="showcasing icon" href="/media/a/laundry.png">
+{% endblock %}
 {% block content %}
 {% block body %}
 <section class="vh-100" style="background-color: #eee;">
@@ -12,7 +15,7 @@
                     <!-- <div class="row justify-content-center"> -->
                     <!-- <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"> -->
 
-                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up Customer</p>
+                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up Customuser</p>
 
                     <form class="mx-1 mx-md-4" method="POST" enctype="multipart/form-data"> {% csrf_token %}
                         <!-- <div class="d-flex flex-row align-items-center mb-4">

@@ -1,0 +1,24 @@
+{% extends 'seller/basic_seller.html' %}
+{% load static %}
+{% block title %} Delete Product {% endblock %}
+{% block css %}
+<link rel="showcasing icon" href="/media/a/laundry.png">
+{% endblock %}
+{% block content %}
+{% block body %}
+<section class="vh-100" style="background-color: #eee;">
+    <div class="container h-100">
+        <div class="card text-black" style="border-radius: 25px;"><br><br><br><br><br>
+<form method="post">{% csrf_token %}
+    
+    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+    <h2>Are you sure you want to delete "{{ product.name }}"?</h2></div>
+    {{ form }}
+    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+    <input type="submit" class="btn btn-primary btn-lg" value="Confirm"></div>
+</form><br><br><br><br><br><br>
+</div>
+</div>
+</section>
+{% endblock %}
+{% endblock content %}

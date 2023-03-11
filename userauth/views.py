@@ -147,6 +147,7 @@ def profile_customer(request):
 def edit_profile_seller(request):
 
     Customuser = customuser.objects.get(user=request.user)
+    print(Customuser)
     if request.method == "POST":
         email = request.POST['email']
         username = request.POST['username']

@@ -1,0 +1,60 @@
+{% extends 'basic.html' %}
+{% load static %}
+{% block title %} My Cart {% endblock %}
+{% block css %}
+<link rel="showcasing icon" href="/media/a/laundry.png">
+{% endblock %}
+{% block body %}
+{% block content %}
+
+<section class="vh-100" >
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+      <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 style="text-align:center;" class="panel-title">My Cart</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Remove From Cart</th>
+
+        </tr>
+      </thead>
+      {% for p in products %}
+  {% if p %}
+
+      <tr>
+        <td> {{p.name}}</td>
+        <td> <img src="/media/{{p.picture }}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>${{p.price}}</td>
+        <td>{{p.description | slice:":100" }}</td>
+
+        <td><a class="btn btn-danger btn-xs" href="{% url 'remove-from-cart' p.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+
+      </tr>
+      {%else%}
+      <br><br><br>
+      <h1>no products</h1>
+      {% endif %}
+      {% endfor %}
+    </table>
+  </div>
+</div>
+<br><br><br>
+<div style="text-align: center;">
+  <button class="button button2">Total ${{total}}</button>
+</div>
+</div>
+</div>
+
+
+<br><br><br><br><br>
+</section>
+{% endblock content %}
+{% endblock %}

@@ -48,7 +48,8 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return str(self.user.id) + str(self.name)+str(self.picture) \
+        +str(self.price)+str(self.description)+str(self.DiscountPrice)+str(self.Cost)+str(self.sizes)+str(self.colors)+str(self.categories)
 @receiver(post_save, sender=Category)
 def create_Product(sender, instance, created, **kwargs):
     if created:

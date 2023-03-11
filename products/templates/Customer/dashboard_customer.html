@@ -86,7 +86,7 @@
                         <div class="header_box">
                             <div class="login_menu">
                                 <ul>
-                                    <li><a href="cart.html">
+                                    <li><a href="/cart_customer/">
                                             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             <span class="padding_10">Cart</span></a>
                                     </li>
@@ -146,7 +146,7 @@
                                     </a>
                                     {% endfor %}</div>
                                     
-                                    <div class="buy_bt"><a href="#">Add to cart</a></div>
+                                    <div class="buy_bt"><a href="{% url 'add-to-cart_customer' product.id  %}">Add to cart</a></div>
                                 </div>
                                 <div class="btn_main">
                                 <p class="price_text">{{ product.description | slice:":15" }}...</p>
