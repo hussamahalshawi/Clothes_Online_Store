@@ -1,7 +1,8 @@
 # .gitignore
-Clothes_Online_Store/__pycache__
-products/__pycache__
-userauth/__pycache__
+Clothes_Online_Store/__pycache__/
+products/__pycache__/
+userauth/__pycache__/
+__pycache__/
 db.sqlite3
 media
 .env
