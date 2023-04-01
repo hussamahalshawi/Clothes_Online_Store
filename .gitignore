@@ -4,5 +4,5 @@ products/__pycache__/
 userauth/__pycache__/
 __pycache__/
 db.sqlite3
-media
+media/
 .env
